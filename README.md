@@ -2,7 +2,7 @@
 
 ## 📋 Descripción del Proyecto
 
-Solución completa para el análisis de datos de un casino online con presencia en LATAM, desarrollada como prueba técnica para el puesto de Data Engineer. El proyecto implementa un pipeline completo de datos, análisis SQL avanzado y visualizaciones en Power BI para optimizar la retención de usuarios y aumentar el ticket promedio de depósitos.
+Solución completa para el análisis de datos de un casino online con presencia en LATAM, desarrollada como prueba técnica para el puesto de Data Engineer. El proyecto implementa análisis SQL avanzado y visualizaciones en Power BI para optimizar la retención de usuarios y aumentar el ticket promedio de depósitos.
 
 ## 🎯 Objetivos Alcanzados
 
