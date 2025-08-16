@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="8"><pre><code>SELECT <br>    favorite_game,<br>    COUNT(*) as total_usuarios,<br>    SUM(churn_risk) as usuarios_en_riesgo,<br>    ROUND(AVG(churn_risk) * 100, 2) as porcentaje_riesgo,<br>    ROUND(AVG(deposit_count), 1) as promedio_depositos,<br>    ROUND(AVG(avg_deposit), 2) as ticket_promedio,<br>    ROUND(AVG(total_game_time), 1) as horas_promedio,<br>    ROUND(AVG(total_sessions), 1) as sesiones_promedio<br>FROM casino_users<br>WHERE deposit_count &gt; 0<br>GROUP BY favorite_game<br>HAVING COUNT(*) &gt;= 2<br>ORDER BY porcentaje_riesgo DESC, total_usuarios DESC</code></pre></th></tr><tr><th>favorite_game</th><th>total_usuarios</th><th>usuarios_en_riesgo</th><th>porcentaje_riesgo</th><th>promedio_depositos</th><th>ticket_promedio</th><th>horas_promedio</th><th>sesiones_promedio</th></tr><tr class="odd"><td>Aviator</td><td>4</td><td>4</td><td>100</td><td>15</td><td>41,41</td><td>51,1</td><td>32</td></tr>
+<tr><td>Tomeofmadness</td><td>11</td><td>7</td><td>63,64</td><td>23,6</td><td>68,69</td><td>134,8</td><td>80,6</td></tr>
+<tr class="odd"><td>Blackjack</td><td>7</td><td>4</td><td>57,14</td><td>11</td><td>86,03</td><td>94,2</td><td>110,6</td></tr>
+<tr><td>Poker</td><td>15</td><td>8</td><td>53,33</td><td>18,5</td><td>84,92</td><td>166,7</td><td>88,7</td></tr>
+<tr class="odd"><td>Fruit Cocktail</td><td>10</td><td>5</td><td>50</td><td>13,2</td><td>67,64</td><td>81,1</td><td>62,2</td></tr>
+<tr><td>Live Roulette</td><td>6</td><td>3</td><td>50</td><td>19,5</td><td>58,04</td><td>65,3</td><td>49,7</td></tr>
+<tr class="odd"><td>Bookofdead</td><td>4</td><td>2</td><td>50</td><td>19</td><td>128,01</td><td>126,3</td><td>140</td></tr>
+<tr><td>John Hunter And The Aztec</td><td>12</td><td>5</td><td>41,67</td><td>26,8</td><td>71,98</td><td>163,4</td><td>108,4</td></tr>
+<tr class="odd"><td>Mustang Gold</td><td>8</td><td>3</td><td>37,5</td><td>16,6</td><td>67,44</td><td>84,5</td><td>89,1</td></tr>
+<tr><td>Sweet Bonanza</td><td>10</td><td>3</td><td>30</td><td>17,2</td><td>96,85</td><td>75,8</td><td>102,8</td></tr>
+<tr class="odd"><td>Crazy Time</td><td>7</td><td>2</td><td>28,57</td><td>20,9</td><td>51,42</td><td>99,3</td><td>54,7</td></tr>
+<tr><td>Gates Of Olympus</td><td>6</td><td>1</td><td>16,67</td><td>24,3</td><td>50,5</td><td>113,8</td><td>53,8</td></tr>
+</table></body></html>

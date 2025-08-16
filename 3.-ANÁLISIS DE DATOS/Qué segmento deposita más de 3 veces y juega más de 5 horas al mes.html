@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="9"><pre><code>SELECT <br>    user_id,<br>    country,<br>    deposit_count,<br>    ROUND(<br>        total_game_time / <br>        CASE <br>            WHEN (julianday('now') - julianday(registration_date)) &lt; 30 THEN 1<br>            ELSE (julianday('now') - julianday(registration_date)) / 30 <br>        END, <br>        2<br>    ) as horas_mensuales,<br>    ROUND(avg_deposit, 2) as ticket_promedio,<br>    total_sessions,<br>    favorite_game,<br>    device_type,<br>    CASE <br>        WHEN deposit_count &gt; 20 THEN 'VIP'<br>        WHEN deposit_count &gt; 10 THEN 'Premium'<br>        WHEN deposit_count &gt; 5 THEN 'Regular Plus'<br>        ELSE 'Regular'<br>    END as segmento<br>FROM casino_users<br>WHERE deposit_count &gt; 3<br>  AND total_game_time / <br>      CASE <br>          WHEN (julianday('now') - julianday(registration_date)) &lt; 30 THEN 1<br>          ELSE (julianday('now') - julianday(registration_date)) / 30 <br>      END &gt; 5<br>ORDER BY deposit_count DESC, horas_mensuales DESC</code></pre></th></tr><tr><th>user_id</th><th>country</th><th>deposit_count</th><th>horas_mensuales</th><th>ticket_promedio</th><th>total_sessions</th><th>favorite_game</th><th>device_type</th><th>segmento</th></tr><tr class="odd"><td>95</td><td>PERU</td><td>88</td><td>29,08</td><td>89,14</td><td>146</td><td>John Hunter And The Aztec</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>86</td><td>ECUADOR</td><td>82</td><td>38,21</td><td>256,71</td><td>364</td><td>Tomeofmadness</td><td>Desktop</td><td>VIP</td></tr>
+<tr class="odd"><td>97</td><td>ARGENTINA</td><td>80</td><td>50,62</td><td>241,1</td><td>160</td><td>Poker</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>25</td><td>PERU</td><td>47</td><td>18,29</td><td>76,93</td><td>46</td><td>Crazy Time</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>15</td><td>MEXICO</td><td>41</td><td>10,79</td><td>24,69</td><td>11</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>14</td><td>ARGENTINA</td><td>39</td><td>14,63</td><td>100,18</td><td>235</td><td>Poker</td><td>Desktop</td><td>VIP</td></tr>
+<tr class="odd"><td>11</td><td>ECUADOR</td><td>37</td><td>11,69</td><td>57,53</td><td>45</td><td>Live Roulette</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>60</td><td>BRASIL</td><td>36</td><td>56,94</td><td>77,27</td><td>32</td><td>Poker</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>24</td><td>PERU</td><td>36</td><td>28,77</td><td>59,21</td><td>127</td><td>Gates Of Olympus</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>22</td><td>MEXICO</td><td>36</td><td>15,56</td><td>58,41</td><td>79</td><td>Crazy Time</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>49</td><td>COLOMBIA</td><td>35</td><td>28,19</td><td>129,33</td><td>222</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>61</td><td>COSTA RICA</td><td>33</td><td>23,58</td><td>43,44</td><td>39</td><td>Live Roulette</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>23</td><td>COLOMBIA</td><td>32</td><td>21,19</td><td>68,77</td><td>111</td><td>Sweet Bonanza</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>93</td><td>CHILE</td><td>31</td><td>16,86</td><td>222,85</td><td>313</td><td>Sweet Bonanza</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>12</td><td>CHILE</td><td>31</td><td>12,61</td><td>45,73</td><td>37</td><td>Gates Of Olympus</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>44</td><td>BRASIL</td><td>30</td><td>11,16</td><td>32,8</td><td>36</td><td>Gates Of Olympus</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>65</td><td>ECUADOR</td><td>30</td><td>9,22</td><td>50,16</td><td>44</td><td>Mustang Gold</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>43</td><td>BRASIL</td><td>29</td><td>26,64</td><td>44,27</td><td>39</td><td>Tomeofmadness</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>62</td><td>BRASIL</td><td>29</td><td>12,41</td><td>265,43</td><td>372</td><td>Bookofdead</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>55</td><td>BRASIL</td><td>28</td><td>17,54</td><td>84,44</td><td>99</td><td>Sweet Bonanza</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>45</td><td>ARGENTINA</td><td>28</td><td>15,86</td><td>30,96</td><td>32</td><td>Tomeofmadness</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>82</td><td>PERU</td><td>28</td><td>9,98</td><td>94,38</td><td>41</td><td>Fruit Cocktail</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>34</td><td>BRASIL</td><td>27</td><td>18,39</td><td>122,9</td><td>487</td><td>Mustang Gold</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>19</td><td>VENEZUELA</td><td>25</td><td>25,95</td><td>40,75</td><td>40</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>79</td><td>MEXICO</td><td>25</td><td>13,58</td><td>143,21</td><td>176</td><td>Poker</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>41</td><td>COSTA RICA</td><td>24</td><td>8,18</td><td>144,17</td><td>21</td><td>Blackjack</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>13</td><td>COLOMBIA</td><td>23</td><td>21,07</td><td>75,45</td><td>125</td><td>Tomeofmadness</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>51</td><td>VENEZUELA</td><td>23</td><td>16,85</td><td>18,95</td><td>50</td><td>Tomeofmadness</td><td>Desktop</td><td>VIP</td></tr>
+<tr class="odd"><td>78</td><td>MEXICO</td><td>23</td><td>10,87</td><td>67,98</td><td>45</td><td>Tomeofmadness</td><td>Mobile</td><td>VIP</td></tr>
+<tr><td>54</td><td>CHILE</td><td>21</td><td>29,87</td><td>67,41</td><td>62</td><td>Gates Of Olympus</td><td>Mobile</td><td>VIP</td></tr>
+<tr class="odd"><td>17</td><td>BRASIL</td><td>21</td><td>7,53</td><td>228,03</td><td>327</td><td>Sweet Bonanza</td><td>Desktop</td><td>VIP</td></tr>
+<tr><td>90</td><td>PERU</td><td>20</td><td>14,14</td><td>30,17</td><td>59</td><td>Crazy Time</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>31</td><td>MEXICO</td><td>20</td><td>9,94</td><td>67,68</td><td>8</td><td>Fruit Cocktail</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>83</td><td>PERU</td><td>20</td><td>7,69</td><td>135,21</td><td>22</td><td>Mustang Gold</td><td>Desktop</td><td>Premium</td></tr>
+<tr class="odd"><td>40</td><td>ECUADOR</td><td>20</td><td>6,74</td><td>43,18</td><td>78</td><td>Bookofdead</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>94</td><td>ARGENTINA</td><td>19</td><td>10,92</td><td>85,75</td><td>77</td><td>Sweet Bonanza</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>29</td><td>ARGENTINA</td><td>19</td><td>7,89</td><td>55,36</td><td>88</td><td>Blackjack</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>77</td><td>CHILE</td><td>18</td><td>16,98</td><td>145,84</td><td>14</td><td>Live Roulette</td><td>Desktop</td><td>Premium</td></tr>
+<tr class="odd"><td>89</td><td>MEXICO</td><td>18</td><td>8,18</td><td>72,78</td><td>147</td><td>Fruit Cocktail</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>52</td><td>PERU</td><td>18</td><td>8,12</td><td>33,27</td><td>73</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>5</td><td>VENEZUELA</td><td>17</td><td>22,95</td><td>60,76</td><td>150</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>32</td><td>PERU</td><td>17</td><td>19,03</td><td>62,8</td><td>48</td><td>Bookofdead</td><td>Desktop</td><td>Premium</td></tr>
+<tr class="odd"><td>100</td><td>BRASIL</td><td>17</td><td>11,73</td><td>32,48</td><td>127</td><td>Live Roulette</td><td>Desktop</td><td>Premium</td></tr>
+<tr><td>59</td><td>ARGENTINA</td><td>17</td><td>8,75</td><td>92,01</td><td>460</td><td>Blackjack</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>37</td><td>MEXICO</td><td>15</td><td>29,4</td><td>147,13</td><td>11</td><td>Sweet Bonanza</td><td>Desktop</td><td>Premium</td></tr>
+<tr><td>46</td><td>ARGENTINA</td><td>15</td><td>6,99</td><td>72,73</td><td>52</td><td>Tomeofmadness</td><td>Desktop</td><td>Premium</td></tr>
+<tr class="odd"><td>18</td><td>COSTA RICA</td><td>14</td><td>27,52</td><td>32,27</td><td>52</td><td>Poker</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>70</td><td>BRASIL</td><td>14</td><td>25,85</td><td>75,45</td><td>48</td><td>Aviator</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>39</td><td>BRASIL</td><td>14</td><td>15,39</td><td>72,44</td><td>10</td><td>Mustang Gold</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>3</td><td>CHILE</td><td>14</td><td>7,34</td><td>57,2</td><td>47</td><td>Fruit Cocktail</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>63</td><td>ECUADOR</td><td>14</td><td>6,5</td><td>52,89</td><td>14</td><td>Tomeofmadness</td><td>Desktop</td><td>Premium</td></tr>
+<tr><td>16</td><td>VENEZUELA</td><td>13</td><td>24,99</td><td>180,91</td><td>309</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>81</td><td>COLOMBIA</td><td>13</td><td>22,02</td><td>28,89</td><td>68</td><td>Tomeofmadness</td><td>Desktop</td><td>Premium</td></tr>
+<tr><td>85</td><td>ECUADOR</td><td>13</td><td>18,76</td><td>90,92</td><td>119</td><td>Fruit Cocktail</td><td>Desktop</td><td>Premium</td></tr>
+<tr class="odd"><td>84</td><td>ECUADOR</td><td>13</td><td>18,48</td><td>96,24</td><td>236</td><td>Poker</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>8</td><td>ARGENTINA</td><td>13</td><td>16,43</td><td>58,14</td><td>76</td><td>Poker</td><td>Mobile</td><td>Premium</td></tr>
+<tr class="odd"><td>91</td><td>CHILE</td><td>12</td><td>15,81</td><td>58,52</td><td>52</td><td>Mustang Gold</td><td>Mobile</td><td>Premium</td></tr>
+<tr><td>67</td><td>ARGENTINA</td><td>10</td><td>12,73</td><td>39,85</td><td>1</td><td>Sweet Bonanza</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>21</td><td>COSTA RICA</td><td>10</td><td>10,47</td><td>46,13</td><td>6</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr><td>69</td><td>VENEZUELA</td><td>10</td><td>8,53</td><td>38,2</td><td>27</td><td>Crazy Time</td><td>Desktop</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>38</td><td>ECUADOR</td><td>10</td><td>7,11</td><td>140,62</td><td>62</td><td>Bookofdead</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr><td>30</td><td>COLOMBIA</td><td>8</td><td>37,88</td><td>77,31</td><td>115</td><td>Fruit Cocktail</td><td>Desktop</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>92</td><td>MEXICO</td><td>8</td><td>20,02</td><td>42,08</td><td>36</td><td>Poker</td><td>Desktop</td><td>Regular Plus</td></tr>
+<tr><td>74</td><td>ECUADOR</td><td>8</td><td>16,89</td><td>52,77</td><td>40</td><td>Crazy Time</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>87</td><td>COLOMBIA</td><td>8</td><td>16,5</td><td>34</td><td>37</td><td>Tomeofmadness</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr><td>71</td><td>VENEZUELA</td><td>8</td><td>10,61</td><td>34,38</td><td>21</td><td>Live Roulette</td><td>Desktop</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>98</td><td>CHILE</td><td>6</td><td>26,83</td><td>37,72</td><td>19</td><td>Poker</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr><td>73</td><td>VENEZUELA</td><td>6</td><td>26,82</td><td>47,36</td><td>62</td><td>Sweet Bonanza</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>20</td><td>COLOMBIA</td><td>6</td><td>18,48</td><td>97,6</td><td>81</td><td>Blackjack</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr><td>27</td><td>ECUADOR</td><td>6</td><td>6,99</td><td>36,34</td><td>57</td><td>Crazy Time</td><td>Mobile</td><td>Regular Plus</td></tr>
+<tr class="odd"><td>96</td><td>COLOMBIA</td><td>5</td><td>55,07</td><td>39,89</td><td>126</td><td>Poker</td><td>Mobile</td><td>Regular</td></tr>
+<tr><td>66</td><td>ECUADOR</td><td>5</td><td>17,63</td><td>25,51</td><td>50</td><td>Gates Of Olympus</td><td>Desktop</td><td>Regular</td></tr>
+<tr class="odd"><td>42</td><td>PERU</td><td>5</td><td>16,2</td><td>117,62</td><td>31</td><td>Poker</td><td>Mobile</td><td>Regular</td></tr>
+<tr><td>68</td><td>ARGENTINA</td><td>5</td><td>6,72</td><td>47,18</td><td>23</td><td>Fruit Cocktail</td><td>Mobile</td><td>Regular</td></tr>
+<tr class="odd"><td>9</td><td>ECUADOR</td><td>4</td><td>15,59</td><td>51,77</td><td>101</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Regular</td></tr>
+<tr><td>72</td><td>PERU</td><td>4</td><td>11,49</td><td>36,48</td><td>27</td><td>Fruit Cocktail</td><td>Mobile</td><td>Regular</td></tr>
+<tr class="odd"><td>2</td><td>PERU</td><td>4</td><td>11,27</td><td>34,58</td><td>52</td><td>Live Roulette</td><td>Mobile</td><td>Regular</td></tr>
+<tr><td>6</td><td>ARGENTINA</td><td>4</td><td>9,4</td><td>74,73</td><td>20</td><td>Poker</td><td>Desktop</td><td>Regular</td></tr>
+</table></body></html>

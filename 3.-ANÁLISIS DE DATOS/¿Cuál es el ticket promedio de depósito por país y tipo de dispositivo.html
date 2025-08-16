@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="9"><pre><code>SELECT <br>    country,<br>    device_type,<br>    COUNT(*) as total_usuarios,<br>    COUNT(CASE WHEN deposit_count &gt; 0 THEN 1 END) as usuarios_activos,<br>    ROUND(AVG(CASE WHEN deposit_count &gt; 0 THEN avg_deposit END), 2) as ticket_promedio,<br>    ROUND(MIN(CASE WHEN deposit_count &gt; 0 THEN avg_deposit END), 2) as ticket_minimo,<br>    ROUND(MAX(CASE WHEN deposit_count &gt; 0 THEN avg_deposit END), 2) as ticket_maximo,<br>    SUM(deposit_count) as total_depositos,<br>    ROUND(SUM(deposit_count * avg_deposit), 2) as volumen_total<br>FROM casino_users<br>GROUP BY country, device_type<br>HAVING COUNT(*) &gt; 0<br>ORDER BY ticket_promedio DESC NULLS LAST, volumen_total DESC</code></pre></th></tr><tr><th>country</th><th>device_type</th><th>total_usuarios</th><th>usuarios_activos</th><th>ticket_promedio</th><th>ticket_minimo</th><th>ticket_maximo</th><th>total_depositos</th><th>volumen_total</th></tr><tr class="odd"><td>BRASIL</td><td>Desktop</td><td>4</td><td>4</td><td>162,21</td><td>32,48</td><td>265,43</td><td>94</td><td>16.356,56</td></tr>
+<tr><td>ARGENTINA</td><td>Desktop</td><td>4</td><td>4</td><td>122,19</td><td>72,73</td><td>241,1</td><td>138</td><td>24.584,89</td></tr>
+<tr class="odd"><td>ECUADOR</td><td>Desktop</td><td>4</td><td>4</td><td>106,51</td><td>25,51</td><td>256,71</td><td>114</td><td>23.100,19</td></tr>
+<tr><td>CHILE</td><td>Desktop</td><td>2</td><td>2</td><td>95,78</td><td>45,73</td><td>145,84</td><td>49</td><td>4.042,75</td></tr>
+<tr class="odd"><td>MEXICO</td><td>Desktop</td><td>4</td><td>4</td><td>91,65</td><td>34,19</td><td>147,13</td><td>55</td><td>6.363,17</td></tr>
+<tr><td>CHILE</td><td>Mobile</td><td>8</td><td>8</td><td>83,75</td><td>37,72</td><td>222,85</td><td>94</td><td>10.663,3</td></tr>
+<tr class="odd"><td>VENEZUELA</td><td>Mobile</td><td>5</td><td>5</td><td>74,6</td><td>40,75</td><td>180,91</td><td>82</td><td>5.595,49</td></tr>
+<tr><td>PERU</td><td>Desktop</td><td>4</td><td>4</td><td>74,32</td><td>10,12</td><td>135,21</td><td>128</td><td>11.646,48</td></tr>
+<tr class="odd"><td>COSTA RICA</td><td>Desktop</td><td>1</td><td>1</td><td>67,15</td><td>67,15</td><td>67,15</td><td>19</td><td>1.275,85</td></tr>
+<tr><td>COLOMBIA</td><td>Mobile</td><td>10</td><td>10</td><td>66,14</td><td>17,32</td><td>129,33</td><td>178</td><td>14.043,71</td></tr>
+<tr class="odd"><td>ECUADOR</td><td>Mobile</td><td>8</td><td>8</td><td>66,08</td><td>36,34</td><td>140,62</td><td>128</td><td>8.001,61</td></tr>
+<tr><td>BRASIL</td><td>Mobile</td><td>9</td><td>9</td><td>65,92</td><td>32,8</td><td>84,44</td><td>185</td><td>11.896,45</td></tr>
+<tr class="odd"><td>COSTA RICA</td><td>Mobile</td><td>7</td><td>7</td><td>64,26</td><td>17,23</td><td>144,17</td><td>99</td><td>6.960,6</td></tr>
+<tr><td>PERU</td><td>Mobile</td><td>11</td><td>11</td><td>57,72</td><td>26</td><td>117,62</td><td>200</td><td>12.369,35</td></tr>
+<tr class="odd"><td>ARGENTINA</td><td>Mobile</td><td>8</td><td>8</td><td>55,7</td><td>30,96</td><td>92,01</td><td>148</td><td>7.847,31</td></tr>
+<tr><td>MEXICO</td><td>Mobile</td><td>6</td><td>6</td><td>54,69</td><td>24,69</td><td>72,78</td><td>145</td><td>7.598,57</td></tr>
+<tr class="odd"><td>COLOMBIA</td><td>Desktop</td><td>2</td><td>2</td><td>53,1</td><td>28,89</td><td>77,31</td><td>21</td><td>994,05</td></tr>
+<tr><td>VENEZUELA</td><td>Desktop</td><td>3</td><td>3</td><td>30,51</td><td>18,95</td><td>38,2</td><td>41</td><td>1.092,89</td></tr>
+</table></body></html>

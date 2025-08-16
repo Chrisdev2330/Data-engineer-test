@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="12"><pre><code>SELECT <br>    user_id,<br>    country,<br>    CAST(julianday('now') - julianday(last_deposit_date) AS INTEGER) as dias_sin_depositar,<br>    deposit_count,<br>    ROUND(avg_deposit, 2) as ticket_promedio,<br>    last_deposit_date,<br>    total_sessions,<br>    ROUND(total_game_time, 2) as horas_totales,<br>    favorite_game,<br>    device_type,<br>    CASE <br>        WHEN avg_deposit &gt; 100 AND deposit_count &gt; 10 THEN 'Prioridad Alta'<br>        WHEN avg_deposit &gt; 50 AND deposit_count &gt; 5 THEN 'Prioridad Media'<br>        ELSE 'Prioridad Baja'<br>    END as prioridad_reactivacion,<br>    churn_risk<br>FROM casino_users<br>WHERE last_deposit_date IS NOT NULL<br>  AND julianday('now') - julianday(last_deposit_date) &gt; 15<br>  AND deposit_count &gt; 0<br>ORDER BY <br>    CASE <br>        WHEN avg_deposit &gt; 100 AND deposit_count &gt; 10 THEN 1<br>        WHEN avg_deposit &gt; 50 AND deposit_count &gt; 5 THEN 2<br>        ELSE 3<br>    END,<br>    avg_deposit DESC,<br>    dias_sin_depositar ASC</code></pre></th></tr><tr><th>user_id</th><th>country</th><th>dias_sin_depositar</th><th>deposit_count</th><th>ticket_promedio</th><th>last_deposit_date</th><th>total_sessions</th><th>horas_totales</th><th>favorite_game</th><th>device_type</th><th>prioridad_reactivacion</th><th>churn_risk</th></tr><tr class="odd"><td>37</td><td>MEXICO</td><td>28</td><td>15</td><td>147,13</td><td>2025-07-19</td><td>11</td><td>29,4</td><td>Sweet Bonanza</td><td>Desktop</td><td>Prioridad Alta</td><td>1</td></tr>
+<tr><td>41</td><td>COSTA RICA</td><td>17</td><td>24</td><td>144,17</td><td>2025-07-30</td><td>21</td><td>71,86</td><td>Blackjack</td><td>Mobile</td><td>Prioridad Alta</td><td>1</td></tr>
+<tr class="odd"><td>83</td><td>PERU</td><td>41</td><td>20</td><td>135,21</td><td>2025-07-06</td><td>22</td><td>65,76</td><td>Mustang Gold</td><td>Desktop</td><td>Prioridad Alta</td><td>1</td></tr>
+<tr><td>34</td><td>BRASIL</td><td>22</td><td>27</td><td>122,9</td><td>2025-07-25</td><td>487</td><td>229,03</td><td>Mustang Gold</td><td>Desktop</td><td>Prioridad Alta</td><td>0</td></tr>
+<tr class="odd"><td>38</td><td>ECUADOR</td><td>30</td><td>10</td><td>140,62</td><td>2025-07-17</td><td>62</td><td>93,69</td><td>Bookofdead</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>82</td><td>PERU</td><td>154</td><td>28</td><td>94,38</td><td>2025-03-15</td><td>41</td><td>76,37</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr class="odd"><td>60</td><td>BRASIL</td><td>15</td><td>36</td><td>77,27</td><td>2025-08-01</td><td>32</td><td>181,35</td><td>Poker</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>25</td><td>PERU</td><td>17</td><td>47</td><td>76,93</td><td>2025-07-30</td><td>46</td><td>142,39</td><td>Crazy Time</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>70</td><td>BRASIL</td><td>68</td><td>14</td><td>75,45</td><td>2025-06-09</td><td>48</td><td>137,49</td><td>Aviator</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>89</td><td>MEXICO</td><td>20</td><td>18</td><td>72,78</td><td>2025-07-27</td><td>147</td><td>81,36</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>46</td><td>ARGENTINA</td><td>43</td><td>15</td><td>72,73</td><td>2025-07-04</td><td>52</td><td>100,08</td><td>Tomeofmadness</td><td>Desktop</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>39</td><td>BRASIL</td><td>28</td><td>14</td><td>72,44</td><td>2025-07-19</td><td>10</td><td>92,12</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>33</td><td>BRASIL</td><td>23</td><td>23</td><td>72,32</td><td>2025-07-24</td><td>11</td><td>20,32</td><td>Gates Of Olympus</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>23</td><td>COLOMBIA</td><td>16</td><td>32</td><td>68,77</td><td>2025-07-31</td><td>111</td><td>121,87</td><td>Sweet Bonanza</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>36</td><td>BRASIL</td><td>30</td><td>9</td><td>68,6</td><td>2025-07-17</td><td>49</td><td>10,91</td><td>Poker</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>78</td><td>MEXICO</td><td>48</td><td>23</td><td>67,98</td><td>2025-06-29</td><td>45</td><td>129,22</td><td>Tomeofmadness</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr class="odd"><td>31</td><td>MEXICO</td><td>17</td><td>20</td><td>67,68</td><td>2025-07-30</td><td>8</td><td>9,94</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>54</td><td>CHILE</td><td>16</td><td>21</td><td>67,41</td><td>2025-07-31</td><td>62</td><td>151,87</td><td>Gates Of Olympus</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>57</td><td>COSTA RICA</td><td>104</td><td>19</td><td>67,15</td><td>2025-05-04</td><td>75</td><td>39,68</td><td>Crazy Time</td><td>Desktop</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>56</td><td>PERU</td><td>58</td><td>20</td><td>66,82</td><td>2025-06-19</td><td>70</td><td>34,88</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr class="odd"><td>32</td><td>PERU</td><td>23</td><td>17</td><td>62,8</td><td>2025-07-24</td><td>48</td><td>91,67</td><td>Bookofdead</td><td>Desktop</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>5</td><td>VENEZUELA</td><td>15</td><td>17</td><td>60,76</td><td>2025-08-01</td><td>150</td><td>143,45</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr class="odd"><td>24</td><td>PERU</td><td>19</td><td>36</td><td>59,21</td><td>2025-07-28</td><td>127</td><td>279,57</td><td>Gates Of Olympus</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>91</td><td>CHILE</td><td>20</td><td>12</td><td>58,52</td><td>2025-07-27</td><td>52</td><td>103,04</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>22</td><td>MEXICO</td><td>91</td><td>36</td><td>58,41</td><td>2025-05-17</td><td>79</td><td>84,32</td><td>Crazy Time</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>8</td><td>ARGENTINA</td><td>162</td><td>13</td><td>58,14</td><td>2025-03-07</td><td>76</td><td>85,19</td><td>Poker</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr class="odd"><td>64</td><td>COLOMBIA</td><td>82</td><td>40</td><td>58,01</td><td>2025-05-26</td><td>57</td><td>10,42</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>11</td><td>ECUADOR</td><td>42</td><td>37</td><td>57,53</td><td>2025-07-05</td><td>45</td><td>87,53</td><td>Live Roulette</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>3</td><td>CHILE</td><td>150</td><td>14</td><td>57,2</td><td>2025-03-19</td><td>47</td><td>102,17</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Media</td><td>1</td></tr>
+<tr><td>74</td><td>ECUADOR</td><td>20</td><td>8</td><td>52,77</td><td>2025-07-27</td><td>40</td><td>173,7</td><td>Crazy Time</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr class="odd"><td>65</td><td>ECUADOR</td><td>24</td><td>30</td><td>50,16</td><td>2025-07-23</td><td>44</td><td>75,77</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Media</td><td>0</td></tr>
+<tr><td>35</td><td>COSTA RICA</td><td>29</td><td>5</td><td>118,82</td><td>2025-07-18</td><td>46</td><td>27,53</td><td>Poker</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>42</td><td>PERU</td><td>24</td><td>5</td><td>117,62</td><td>2025-07-23</td><td>31</td><td>183,88</td><td>Poker</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>76</td><td>CHILE</td><td>80</td><td>2</td><td>114,25</td><td>2025-05-28</td><td>31</td><td>64,71</td><td>Blackjack</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>6</td><td>ARGENTINA</td><td>178</td><td>4</td><td>74,73</td><td>2025-02-19</td><td>20</td><td>95,71</td><td>Poker</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>1</td><td>CHILE</td><td>99</td><td>2</td><td>72,75</td><td>2025-05-09</td><td>61</td><td>52,35</td><td>Tomeofmadness</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>4</td><td>BRASIL</td><td>53</td><td>2</td><td>65,68</td><td>2025-06-24</td><td>25</td><td>116,98</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>28</td><td>PERU</td><td>20</td><td>3</td><td>59,48</td><td>2025-07-27</td><td>44</td><td>33,27</td><td>Blackjack</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>9</td><td>ECUADOR</td><td>18</td><td>4</td><td>51,77</td><td>2025-07-29</td><td>101</td><td>100,59</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>50</td><td>COSTA RICA</td><td>160</td><td>11</td><td>47,76</td><td>2025-03-09</td><td>66</td><td>57</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>68</td><td>ARGENTINA</td><td>41</td><td>5</td><td>47,18</td><td>2025-07-06</td><td>23</td><td>58,38</td><td>Fruit Cocktail</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>12</td><td>CHILE</td><td>42</td><td>31</td><td>45,73</td><td>2025-07-05</td><td>37</td><td>84,29</td><td>Gates Of Olympus</td><td>Desktop</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>43</td><td>BRASIL</td><td>18</td><td>29</td><td>44,27</td><td>2025-07-29</td><td>39</td><td>77,75</td><td>Tomeofmadness</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>61</td><td>COSTA RICA</td><td>16</td><td>33</td><td>43,44</td><td>2025-07-31</td><td>39</td><td>94,73</td><td>Live Roulette</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>53</td><td>VENEZUELA</td><td>15</td><td>21</td><td>43,23</td><td>2025-08-01</td><td>43</td><td>16,69</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>40</td><td>ECUADOR</td><td>29</td><td>20</td><td>43,18</td><td>2025-07-18</td><td>78</td><td>100,32</td><td>Bookofdead</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>92</td><td>MEXICO</td><td>75</td><td>8</td><td>42,08</td><td>2025-06-02</td><td>36</td><td>143,82</td><td>Poker</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>19</td><td>VENEZUELA</td><td>84</td><td>25</td><td>40,75</td><td>2025-05-24</td><td>40</td><td>116,4</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>48</td><td>COLOMBIA</td><td>35</td><td>1</td><td>39,76</td><td>2025-07-12</td><td>40</td><td>70,92</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>26</td><td>CHILE</td><td>41</td><td>6</td><td>39,33</td><td>2025-07-06</td><td>49</td><td>38,52</td><td>Blackjack</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>69</td><td>VENEZUELA</td><td>47</td><td>10</td><td>38,2</td><td>2025-06-30</td><td>27</td><td>133,2</td><td>Crazy Time</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>75</td><td>MEXICO</td><td>42</td><td>7</td><td>36,62</td><td>2025-07-05</td><td>36</td><td>31,84</td><td>Aviator</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>58</td><td>ARGENTINA</td><td>66</td><td>37</td><td>36,35</td><td>2025-06-11</td><td>38</td><td>12,73</td><td>Aviator</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>27</td><td>ECUADOR</td><td>17</td><td>6</td><td>36,34</td><td>2025-07-30</td><td>57</td><td>60,25</td><td>Crazy Time</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>2</td><td>PERU</td><td>35</td><td>4</td><td>34,58</td><td>2025-07-12</td><td>52</td><td>34,4</td><td>Live Roulette</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>71</td><td>VENEZUELA</td><td>19</td><td>8</td><td>34,38</td><td>2025-07-28</td><td>21</td><td>49,36</td><td>Live Roulette</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>47</td><td>MEXICO</td><td>27</td><td>7</td><td>34,19</td><td>2025-07-20</td><td>16</td><td>23,98</td><td>Sweet Bonanza</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>87</td><td>COLOMBIA</td><td>37</td><td>8</td><td>34</td><td>2025-07-10</td><td>37</td><td>94,88</td><td>Tomeofmadness</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>52</td><td>PERU</td><td>120</td><td>18</td><td>33,27</td><td>2025-04-18</td><td>73</td><td>77,87</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>44</td><td>BRASIL</td><td>27</td><td>30</td><td>32,8</td><td>2025-07-20</td><td>36</td><td>85,36</td><td>Gates Of Olympus</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>18</td><td>COSTA RICA</td><td>162</td><td>14</td><td>32,27</td><td>2025-03-07</td><td>52</td><td>153,71</td><td>Poker</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>45</td><td>ARGENTINA</td><td>24</td><td>28</td><td>30,96</td><td>2025-07-23</td><td>32</td><td>134,06</td><td>Tomeofmadness</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>81</td><td>COLOMBIA</td><td>58</td><td>13</td><td>28,89</td><td>2025-06-19</td><td>68</td><td>140,61</td><td>Tomeofmadness</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>7</td><td>PERU</td><td>77</td><td>15</td><td>26</td><td>2025-05-31</td><td>37</td><td>65,96</td><td>Poker</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr class="odd"><td>66</td><td>ECUADOR</td><td>17</td><td>5</td><td>25,51</td><td>2025-07-30</td><td>50</td><td>61,43</td><td>Gates Of Olympus</td><td>Desktop</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr><td>15</td><td>MEXICO</td><td>15</td><td>41</td><td>24,69</td><td>2025-08-01</td><td>11</td><td>94,78</td><td>John Hunter And The Aztec</td><td>Mobile</td><td>Prioridad Baja</td><td>0</td></tr>
+<tr class="odd"><td>51</td><td>VENEZUELA</td><td>29</td><td>23</td><td>18,95</td><td>2025-07-18</td><td>50</td><td>94,64</td><td>Tomeofmadness</td><td>Desktop</td><td>Prioridad Baja</td><td>1</td></tr>
+<tr><td>99</td><td>COLOMBIA</td><td>15</td><td>8</td><td>17,32</td><td>2025-08-01</td><td>15</td><td>22,73</td><td>Mustang Gold</td><td>Mobile</td><td>Prioridad Baja</td><td>1</td></tr>
+</table></body></html>
